@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnostic Test Role (Posting 90417) | Retrieval Lab TEAL-GECKO-4970</title>
+<meta name="description" content="Apply for Diagnostic Test Role, posting 90417. PLUM-STOAT-2539">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root { --ink:#1d2430; --muted:#5b6475; --line:#d9dee7; --bg:#f7f8fa; --card:#fff; --accent:#2457c5; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:24px; margin-bottom:20px; }
+  .meta { color:var(--muted); font-size:14px; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; padding:10px 20px; border-radius:6px;
+         text-decoration:none; font-weight:600; margin-right:8px; }
+  .btn.alt { background:#fff; color:var(--accent); border:1px solid var(--accent); }
+  /* Mirrors Phenom's phw-d-none utility class */
+  .d-none { display:none !important; }
+  .offscreen { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+  .beacon-css { background-image:url("beacon/css-rendered.gif"); background-size:0 0; }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- SAGE-EGRET-5591 (HTML comment) -->
+
+  <!-- Job page state: populated by JS from the embedded JSON, like Phenom -->
+  <div data-page-state="exists" id="state-exists" class="beacon-css"></div>
+
+  <!-- Expired job page state: hidden by class, removed by JS on load, like Phenom -->
+  <div data-page-state="expired" class="d-none job-expired-view" id="state-expired">
+    <section class="card">
+      <h2>We're sorry&hellip; this diagnostic posting is no longer accepting applications.</h2>
+      <p>Explore other opportunities. BRONZE-MOLE-0832</p>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Retrieval diagnostic</h2>
+    <p>Visible reference marker: <strong>AMBER-FALCON-2291</strong></p>
+    <p>Page version marker: <strong>GARNET-V1</strong></p>
+
+    <p class="d-none">Hidden by class: COBALT-HERON-5837</p>
+    <p style="display:none">Hidden by inline style: MAPLE-OTTER-4410</p>
+    <p hidden>Hidden by attribute: QUARTZ-LYNX-9064</p>
+    <p style="visibility:hidden">Hidden by visibility: CEDAR-WREN-3352</p>
+    <p class="offscreen">Positioned off screen: SLATE-BISON-7718</p>
+    <p id="js-remove">Removed by script on load: OCHRE-PUFFIN-8846</p>
+
+    <p id="js-add-slot"></p>
+    <p id="js-delay-slot"></p>
+  </section>
+
+  <noscript><p>No-script fallback: ONYX-MOTH-3168</p></noscript>
+  <template><p>Inert template: FLINT-CRANE-6047</p></template>
+
+</main>
+
+<script type="application/json" id="job-data">
+{"jobId":"90417","title":"Diagnostic Test Role","employer":"Retrieval Lab","location":"Remote",
+ "status":"open","applyUrl":"#apply","note":"JADE-IBIS-7402"}
+</script>
+
+<script>
+(function () {
+  // Decode markers at runtime so the literal strings never appear in the raw HTML.
+  function dec(codes) { return String.fromCharCode.apply(null, codes); }
+
+  // Phenom-style render: build the job view from JSON, then drop the expired state.
+  var job = JSON.parse(document.getElementById('job-data').textContent);
+  var exists = document.getElementById('state-exists');
+  exists.innerHTML =
+    '<section class="card">' +
+      '<h1>' + job.title + '</h1>' +
+      '<p class="meta">' + job.employer + ' &middot; ' + job.location + ' &middot; Job ID ' + job.jobId + '</p>' +
+      '<p>This posting is currently accepting applications.</p>' +
+      '<a class="btn" href="' + job.applyUrl + '">Apply Now</a>' +
+      '<a class="btn alt" href="#save">Save</a>' +
+    '</section>';
+  var expired = document.getElementById('state-expired');
+  expired.parentNode.removeChild(expired);
+
+  var rm = document.getElementById('js-remove');
+  rm.parentNode.removeChild(rm);
+
+  // Marker J1, added immediately
+  document.getElementById('js-add-slot').textContent = 'Added by script: ' +
+    dec([73,86,79,82,89,45,77,65,78,84,65,45,54,54,50,51]);
+
+  // Marker J2, added after 3 seconds
+  setTimeout(function () {
+    document.getElementById('js-delay-slot').textContent = 'Added by script after 3s: ' +
+      dec([82,85,83,83,69,84,45,75,79,65,76,65,45,49,49,56,53]);
+  }, 3000);
+
+  // Access-log beacon: only requested if JavaScript executed. A 404 is fine.
+  new Image().src = 'beacon/js-ran.gif?t=' + Date.now();
+})();
+</script>
+</body>
+</html>
